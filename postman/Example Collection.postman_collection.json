@@ -1,0 +1,550 @@
+{
+	"info": {
+		"_postman_id": "a51d0a37-1386-4ebc-8914-3c14439e2a44",
+		"name": "Example Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "products",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "78d0e39b-223f-4439-be17-ff1195912b2d",
+								"exec": [
+									"pm.environment.set(\"testGroup\", \"list\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "4134af66-cf67-48f5-8084-1101184743c5",
+								"exec": [
+									"const item1 = pm.response.json().data[0];",
+									"",
+									"// request-specific tests:",
+									"pm.test(\"Item #1 has property 'type' of value 'products'\", function () {",
+									"    pm.expect(item1).to.have.property('type', 'products');",
+									"});",
+									"pm.test(\"Item #1 has property 'attributes' with keys: 'name','description'\", function () {",
+									"    pm.expect(item1.attributes).to.have.all.keys('name','description');",
+									"});",
+									"",
+									"// \"reset\" testGroup",
+									"pm.environment.set(\"testGroup\", \"\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/products",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products"
+							]
+						},
+						"description": "List of all products"
+					},
+					"response": [
+						{
+							"name": "products 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/products",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jan 2019 10:41:31 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "123"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,Content-Type,Accept,Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"type\": \"products\",\n            \"attributes\": {\n                \"name\": \"Product #1 Name\",\n                \"description\": \"Product #1 Description\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "products/:id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "24233987-34ed-4c03-b3fe-ee886556c805",
+								"exec": [
+									"pm.environment.set(\"testGroup\", \"item\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8bd9994-d1ad-483b-9e23-7e52158095a9",
+								"exec": [
+									"const item = pm.response.json().data;",
+									"",
+									"// request-specific tests",
+									"pm.test(\"Item has property 'type' of value 'products'\", function () {",
+									"    pm.expect(item).to.have.property('type', 'products');",
+									"});",
+									"pm.test(\"Item has property 'attributes' with all required keys\", function () {",
+									"    pm.expect(item.attributes).to.have.all.keys('name','description');",
+									"});",
+									"",
+									"// \"reset\" testGroup",
+									"pm.environment.set(\"testGroup\", \"\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/products/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						},
+						"description": "Get specific product"
+					},
+					"response": [
+						{
+							"name": "products/:id 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/products/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"products",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jan 2019 10:42:18 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "117"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,Content-Type,Accept,Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"type\": \"products\",\n        \"attributes\": {\n            \"name\": \"Product #1 Name\",\n            \"description\": \"Product #1 Description\"\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "db137c4d-9a0d-4e78-a2e8-11fd9be42338",
+								"exec": [
+									"pm.environment.set(\"testGroup\", \"list\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "662ac0ed-c33e-4e63-8b8b-bc90b55b784d",
+								"exec": [
+									"const item1 = pm.response.json().data[0];",
+									"",
+									"// request-specific tests",
+									"pm.test(\"Item #1 has property 'type' of value 'users'\", function () {",
+									"    pm.expect(item1).to.have.property('type', 'users');",
+									"});",
+									"pm.test(\"Item #1 has property 'attributes' with keys: 'email'\", function () {",
+									"    pm.expect(item1.attributes).to.have.all.keys('email');",
+									"});",
+									"",
+									"// \"reset\" testGroup",
+									"pm.environment.set(\"testGroup\", \"\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "List all users"
+					},
+					"response": [
+						{
+							"name": "users 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/users",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jan 2019 10:42:28 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "114"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,Content-Type,Accept,Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"type\": \"users\",\n            \"attributes\": {\n                \"email\": \"hello@bornfight.com\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "users/:id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5bedc204-a1a5-4066-bafc-ab280433fe31",
+								"exec": [
+									"pm.environment.set(\"testGroup\", \"item\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "659460bf-ad4e-4261-8e02-648ccca4d537",
+								"exec": [
+									"const item = pm.response.json().data;",
+									"",
+									"// request-specific tests",
+									"pm.test(\"Item has property 'type' of value 'users'\", function () {",
+									"    pm.expect(item).to.have.property('type', 'users');",
+									"});",
+									"pm.test(\"Item has property 'attributes' with all required keys\", function () {",
+									"    pm.expect(item.attributes).to.have.all.keys('email');",
+									"});",
+									"",
+									"// \"reset\" testGroup",
+									"pm.environment.set(\"testGroup\", \"\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/users/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						},
+						"description": "Get specific user"
+					},
+					"response": [
+						{
+							"name": "users/:id 200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/users/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 21 Jan 2019 10:43:02 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "107"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,Content-Type,Accept,Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"type\": \"users\",\n        \"attributes\": {\n            \"email\": \"hello@bornfight.com\"\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ec4cfc85-4f01-44be-9b8d-be9942edd009",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "586d8a75-89d0-4a09-a036-d79e4efc1f59",
+				"type": "text/javascript",
+				"exec": [
+					"// tests for all requests",
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"",
+					"// tests for \"list\" testGroup",
+					"if(pm.environment.get(\"testGroup\") === \"list\")",
+					"{",
+					"    pm.test(\"body object has 'data' key\", function () {",
+					"        pm.expect(pm.response.json()).to.have.property('data');",
+					"    });",
+					"    pm.test(\"body.data is an array\", function () {",
+					"        pm.expect(pm.response.json().data).to.be.an('array')",
+					"    });",
+					"    pm.test(\"body.data[0] has only keys: 'id', 'type', 'attributes'\", function () {",
+					"        pm.expect(pm.response.json().data[0]).to.have.all.keys('id', 'type', 'attributes');",
+					"    });",
+					"}",
+					"",
+					"// tests for \"item\" testGroup",
+					"else if(pm.environment.get(\"testGroup\") === \"item\")",
+					"{",
+					"    pm.test(\"body object has only 'data' key\", function () {",
+					"        pm.expect(pm.response.json()).to.have.property('data');",
+					"    });",
+					"    pm.test(\"body.data has only keys: 'type', 'id', 'attributes'\", function () {",
+					"        pm.expect(pm.response.json().data).to.have.all.keys('type', 'id', 'attributes');",
+					"    });",
+					"}"
+				]
+			}
+		}
+	]
+}
